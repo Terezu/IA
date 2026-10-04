@@ -1,4 +1,22 @@
 public class Arts {
+    private State<Arts> state;
+
+    public Arts() {
+        setState(new InspirationState(this));
+    }
+
+    public void update() {
+        state.execute();
+    }
+
+    public void setState(State<Arts> state) {
+        if (this.state != null) {
+            this.state.leave();
+        }
+        this.state = state;
+        this.state.enter();
+    }
+
     private int references = 0;
     private int assets = 0;
 

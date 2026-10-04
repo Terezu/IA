@@ -1,4 +1,22 @@
 public class Prog {
+    private State<Prog> state;
+
+    public Prog(Arts arts) {
+        setState(new PrototipandoState(this, arts));
+    }
+
+    public void update() {
+        state.execute();
+    }
+
+    public void setState(State<Prog> state) {
+        if (this.state != null) {
+            this.state.leave();
+        }
+        this.state = state;
+        this.state.enter();
+    }
+
     private int implementacoes = 0;
     private int bugs = 0;
 
